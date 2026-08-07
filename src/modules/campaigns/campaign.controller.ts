@@ -1,8 +1,30 @@
 import { Request, Response } from "express";
+import { createCampaignService, getAllCampaignsService } from "./campaign.service";
 
-export const getAllCampaigns = (req: Request, res: Response) => {
+
+export const getAllCampaigns = async (
+  req: Request,
+  res: Response
+) => {
+  const campaigns = await getAllCampaignsService();
+
   res.status(200).json({
     success: true,
-    message: "All campaigns fetched successfully",
+    data: campaigns,
+  });
+};
+
+
+
+export const createCampaigns = async (
+  req: Request,
+  res: Response
+) => {
+  const result = await createCampaignService(req.body)
+
+  res.status(201).json({
+    success: true,
+    message: "Campaign created successfully",
+    data: result,
   });
 };
