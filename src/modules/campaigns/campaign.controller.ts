@@ -1,18 +1,39 @@
 import { Request, Response } from "express";
-import { createCampaignService, getAllCampaignsService } from "./campaign.service";
+import { createCampaignService, getAllCampaignsService, getCampaignByIdService } from "./campaign.service";
+import { Filter, ObjectId } from "mongodb";
+import { ICampaign } from "./campaign.interface";
 
 
 export const getAllCampaigns = async (
   req: Request,
   res: Response
 ) => {
-  const campaigns = await getAllCampaignsService();
+  const query:Filter<ICampaign> = {};
+const status = req.query.status as string || ''
+
+if (status) {
+  query.status = status
+}
+  const data = await getAllCampaignsService(query);
 
   res.status(200).json({
     success: true,
-    data: campaigns,
+    data
   });
 };
+
+export const getCampaignById=async(
+  req: Request,
+  res: Response
+)=>{
+const {id} =req.params
+const data = await  getCampaignByIdService(id as string);
+
+  res.status(200).json({
+    success: true,
+    data
+  });
+}
 
 
 
@@ -20,7 +41,12 @@ export const createCampaigns = async (
   req: Request,
   res: Response
 ) => {
-  const result = await createCampaignService(req.body)
+  const data = req.body;
+ const document = {
+  ...data,
+  createdAt: new Date(),
+};
+  const result = await createCampaignService(document)
 
   res.status(201).json({
     success: true,

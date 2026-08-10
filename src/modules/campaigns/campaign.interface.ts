@@ -1,4 +1,5 @@
 export type ICampaign = {
+  
   campaign_title: string;
   campaign_story: string;
   category: string;
@@ -8,4 +9,5 @@ export type ICampaign = {
   reward_info: string;
   campaign_image_url: string;
   status:string;
+  createdAt: Date;
 };
