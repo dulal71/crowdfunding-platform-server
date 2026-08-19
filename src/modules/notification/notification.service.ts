@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { getDB } from "../../config/db";
 import { INotification } from "./notification.interface";
 
@@ -29,3 +30,18 @@ export const getNotificationsService = async (userId:string) => {
 
   return notifications;
 };
+
+
+export const deleteNotificationService=async(id:string)=>{
+   const db = getDB();
+   console.log(id);
+  const notificationCollection =
+    db.collection<INotification>("notifications");
+const query={
+  _id:new ObjectId(id)
+}
+  const result = await notificationCollection.deleteOne(query)
+    
+
+  return result ;
+}

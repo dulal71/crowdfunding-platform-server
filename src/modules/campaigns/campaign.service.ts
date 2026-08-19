@@ -40,6 +40,21 @@ export const getCampaignByIdService = async (id: string) => {
   return campaign;
 };
 
+export const updateCampaignData=async(id:string,data:object)=>{
+  const db=getDB();
+  const campaignCollection =
+    db.collection<ICampaign>("campaigns");
+ const query = {
+    _id: new ObjectId(id)
+  };
+  console.log(id);
+  const update ={
+    $set:data
+  }
+   const result = await campaignCollection.updateOne(query,update);
+
+  return result;
+}
 
 
 

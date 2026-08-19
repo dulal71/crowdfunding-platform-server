@@ -1,7 +1,8 @@
 import express from "express"
-import { getNotifications } from "./notification.controller"
+import { deleteNotification, getNotifications } from "./notification.controller"
 
-const notificationRouter = express.Router()
+export const notificationRouter = express.Router()
 notificationRouter.get('/',getNotifications)
+notificationRouter.delete('/:id',deleteNotification)
 
 export default notificationRouter

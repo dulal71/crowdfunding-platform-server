@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getNotificationsService } from "./notification.service";
+import { deleteNotificationService, getNotificationsService } from "./notification.service";
 
 export const getNotifications = async (
   req: Request,
@@ -22,3 +22,26 @@ export const getNotifications = async (
     });
   }
 };
+
+
+export const deleteNotification=async(
+ req: Request,
+  res: Response 
+)=>{
+try {
+    const {id} = req.params as {id:string}
+      console.log(id); 
+   const result = await deleteNotificationService(id)
+     
+
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed delete notifications",
+    });
+  }
+}

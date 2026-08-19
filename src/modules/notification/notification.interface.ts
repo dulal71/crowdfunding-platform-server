@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export type NotificationType =
   | "CAMPAIGN_CREATED"
   | "CAMPAIGN_APPROVED"
@@ -9,7 +11,7 @@ export type NotificationType =
   | "WITHDRAW_REJECTED";
 
 export interface INotification {
-  _id?: string;
+  _id?:ObjectId;
   type: NotificationType;
   title: string;
   message: string;
