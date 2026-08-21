@@ -34,7 +34,7 @@ export const getNotificationsService = async (userId:string) => {
 
 export const deleteNotificationService=async(id:string)=>{
    const db = getDB();
-   console.log(id);
+   
   const notificationCollection =
     db.collection<INotification>("notifications");
 const query={

@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 
 export type NotificationType =
+   | "DONATION_RECEIVED"
   | "CAMPAIGN_CREATED"
   | "CAMPAIGN_APPROVED"
   | "CAMPAIGN_REJECTED"
@@ -19,6 +20,7 @@ export interface INotification {
   userId: string;
 
   campaignId?: string;
+    
   donationId?: string;
   withdrawalId?: string;
 
