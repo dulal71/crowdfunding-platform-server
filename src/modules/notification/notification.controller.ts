@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { deleteNotificationService, getNotificationsService } from "./notification.service";
+import { deleteNotificationService, getNotificationsService, getNotificationsServiceByCampaignId, getNotificationsServiceById } from "./notification.service";
 
 export const getNotifications = async (
   req: Request,
@@ -16,6 +16,27 @@ export const getNotifications = async (
       data: notifications,
     });
   } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to get notifications",
+    });
+  }
+};
+export const getNotificationByCampaignId = async (
+    req: Request<{ campaignId: string }>,
+  res: Response
+) => {
+  try {
+   const {campaignId} = req.params;
+       
+    const notification = await getNotificationsServiceByCampaignId(campaignId);
+
+    res.status(200).json({
+      success: true,
+      data: notification,
+    });
+  } catch (error) {
+    console.log(error);
     res.status(500).json({
       success: false,
       message: "Failed to get notifications",
