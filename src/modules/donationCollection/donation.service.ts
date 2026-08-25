@@ -3,6 +3,8 @@ import { getDB } from "../../config/db";
 import { INotification } from "../notification/notification.interface";
 import { createNotificationService } from "../notification/notification.service";
 import { IDonation } from "./donation.interface";
+import { ICampaign } from "../campaigns/campaign.interface";
+import { IUser } from "../users/user.interface";
 
 export const createDonationService=async(data:IDonation)=>{
 console.log(data);
@@ -73,6 +75,37 @@ const result = await donationCollection.updateOne(query,updateData)
     createdAt: new Date(),
   }
  await createNotificationService(notification)
+ }
+
+
+ if(result.modifiedCount > 0 && data.status ==="approved"){
+  const campaignCollection =
+      db.collection<ICampaign>("campaigns");
+      const query={
+        _id:new ObjectId(data.campaignId)
+      }
+      const updateData={
+        $inc:{
+         funded_amount :data.amount
+        }
+      }
+      const res = await campaignCollection.updateOne(query,updateData)
+      if(res.modifiedCount > 0){
+        const UserCollection =
+            db.collection<IUser>("user");
+             const result = await UserCollection.updateOne(
+    {
+      _id: new ObjectId(data.supporterId),
+    },
+    {
+      $inc: {
+        credits: -data.amount,
+      },
+    }
+    
+  );
+  
+      }
  }
 
 ;

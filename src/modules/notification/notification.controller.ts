@@ -22,27 +22,7 @@ export const getNotifications = async (
     });
   }
 };
-export const getNotificationByCampaignId = async (
-    req: Request<{ campaignId: string }>,
-  res: Response
-) => {
-  try {
-   const {campaignId} = req.params;
-       
-    const notification = await getNotificationsServiceByCampaignId(campaignId);
 
-    res.status(200).json({
-      success: true,
-      data: notification,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to get notifications",
-    });
-  }
-};
 
 
 export const deleteNotification=async(

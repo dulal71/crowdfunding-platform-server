@@ -5,7 +5,7 @@ export type IDonation ={
     supporterId:string,
     creatorId:string,
     amount:number,
-    status:'pending',
+     status: "pending" | "approved" | "rejected",
     createdAt:string,
     acceptedAt:string
 }

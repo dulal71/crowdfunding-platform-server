@@ -7,5 +7,5 @@ export interface IUser {
    image:string;
    createdAt:number;
    role:string;
-   credits:Number
+   credits:number
 }

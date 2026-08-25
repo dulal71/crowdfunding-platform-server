@@ -17,20 +17,6 @@ export const createNotificationService = async (
   return result;
 };
 
-export const getNotificationsServiceByCampaignId = async (campaignId:string) => {
-  const db = getDB();
-
-  const notificationCollection =
-    db.collection<INotification>("notifications");
-console.log(campaignId);
-const query = {
-  campaignId: campaignId,
-};
-  const notification = await notificationCollection.findOne(query)
-    
-
-  return notification;
-};
 
 
 
