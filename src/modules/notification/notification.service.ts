@@ -48,3 +48,21 @@ const query={
 
   return result ;
 }
+
+
+export const updateNotificationService=async(id:string,data:object)=>{
+ const db = getDB();
+   console.log(data);
+  const notificationCollection =
+    db.collection<INotification>("notifications");
+const query={
+  _id:new ObjectId(id)
+}
+const updateData={
+  $set:data
+}
+  const result = await notificationCollection.updateOne(query,updateData)
+    
+
+  return result ;
+}

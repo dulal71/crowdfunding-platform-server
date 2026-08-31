@@ -11,6 +11,7 @@ export const getAllCampaigns = async (
   const query:Filter<ICampaign> = {};
 const status = req.query.status as string || ''
 const category=req.query.category as string || ''
+console.log(category);
 const excludeId=req.query.excludeId as string
 if (status) {
   query.status = status

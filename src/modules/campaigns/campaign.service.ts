@@ -56,17 +56,6 @@ export const updateCampaignData=async(id:string,data:object)=>{
   return result;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 export const createCampaignService=async(data:ICampaign)=>{
 console.log(data);
   const db = getDB()
